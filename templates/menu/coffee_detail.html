@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Coffee</title>
+{% endblock %}
+
+{% block content %}
+    <div class="menu">
+        <h2>{{ coffee.name }}</h2>
+        <img src="{{ coffee.coffee_picture.url }}" width=50%>
+        <p>Gluten free: {{ coffee.gluten_free }}</p>
+        <p>Price: {{ coffee.price }} $ </p>
+        <form action="{% url 'detail_coffee' coffee.id %}" method="post">
+            {% csrf_token %}
+            {% if in_favourite %}
+                <button type="submit" name="product_id" class="delete-button" value= {{ coffee.id }}>Delete from favourite</button>
+            {% else %}
+                <button type="submit" name="product_id" class="add-button" value= {{ coffee.id }}>Add to favourite</button>
+            {% endif %}
+        </form>
+        <br>
+
+
+    </div>
+{% endblock content %}

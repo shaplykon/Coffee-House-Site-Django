@@ -1,0 +1,91 @@
+{% load static %}
+{% csrf_token %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="icon" href="/static/images/coffee_favicon.jpg" type="image/x-icon">
+    <style>
+        @import url("/static/css/base.css");
+    </style>
+
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="header">
+    <h1 class="main-title"><a href="http://localhost:8000/">Coffee house</a></h1>
+    <p>A website created by me.</p>
+</div>
+
+<div class="navbarr" id="myNavbar">
+    {% if user.is_superuser %}
+        <a href="http://localhost:8000/admin" class="right">Admin</a>
+    {% endif %}
+    <a href="http://localhost:8000/accounts/register" class="right">Registration</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
+        <a href="{% url 'favourites' %}">Favourites</a>
+        <a href="{% url 'account' %}">Account</a>
+    {% else %}
+        <a href="{% url 'login' %}?next={{ request.path }}">Login</a>
+    {% endif %}
+</div>
+
+<script>
+    window.onscroll = function () {
+        myFunction()
+    };
+
+    const header = document.getElementById("myNavbar");
+    const sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
+
+<div class="page-wrapper">
+    <div>
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h1 class="footer-title">Contacts</h1>
+            <ul>
+                <li class="instagram"><a href="https://www.instagram.com/dxn__bnldn/">dxn__bnldn</a>
+                <li class="vk"><a href="https://vk.com/lbn228">lbn228</a>
+            </ul>
+        </div>
+
+    </div>
+    <div class="footer-bottom">Created by Nikita Shaplyko</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+
+

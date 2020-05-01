@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Coffee</title>
+{% endblock %}
+
+{% block content %}
+    <div class="menu">
+        {% for coffee in coffee_list %}
+            <h2><a href="http://localhost:8000/menu/coffee/{{ coffee.id }}">{{ coffee.name }}</a></h2>
+            <img src="{{ coffee.coffee_picture.url }}" width=50%>
+            <br>
+        {% endfor %}
+
+    </div>
+{% endblock content %}

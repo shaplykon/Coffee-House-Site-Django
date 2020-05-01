@@ -1,0 +1,36 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% block main %}
+
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top"
+                {% if user.picture %}
+             src="{{ user.picture.url }}"
+                {% else %}
+             src="/static/images/231076-1908_FPT_202680_base.jpg"
+                {% endif %}
+             alt="Card image cap">
+
+        <form action="{% url 'upload_picture' %}" method="post" class="form-control" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="picture">
+            <button type="submit" class="btn btn-primary">Upload profile avatar</button>
+        </form>
+
+
+        <form action="{% url 'save_changes' %}" method="post" class="form-control">
+            {{ form }}
+            {% csrf_token %}
+            <button type="submit" name="user_id" class="btn btn-primary btn-block" value={{ user.id }}>
+                Save changes
+            </button>
+        </form>
+    </div>
+
+    <form action="{% url 'account' %}" method="post" class="form-control">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ delete_form|crispy }}
+        <button type="submit" class="btn btn-primary btn-block">Delete account</button>
+    </form>
+{% endblock %}

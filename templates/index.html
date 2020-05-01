@@ -1,0 +1,51 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="side">
+            <br>
+
+
+            {% if user.is_authenticated %}
+                <h2>Welcome, {{ user.get_username }}</h2>
+            {% endif %}
+            <h2>Information</h2>
+            <h5>Our location:</h5>
+            <p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6520.2452643020415!2d27.593529670293833!3d53.912724334839346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc0def69b19282161!2z0KTQsNC60YPQu9GM0YLQtdGCINC60L7QvNC_0YzRjtGC0LXRgNC90YvRhSDRgdC40YHRgtC10Lwg0Lgg0YHQtdGC0LXQuSDQkdCT0KPQmNCg!5e0!3m2!1sru!2sby!4v1585912298945!5m2!1sru!2sby"
+                        width="400" height="300" frameborder="0"
+                        style="border:0;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+                        allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
+            <p/>
+            <h5>Address: Minsk, Gikalo str., 9</h5>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="http://localhost:8000/menu/coffee">Coffee</a>
+                    <a class="dropdown-item" href="http://localhost:8000/menu/tea">Tea</a>
+                    <a class="dropdown-item" href="http://localhost:8000/menu/desserts">Desserts</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            {% for post in object_list %}
+                <h2 class="title"><a href="post/{{ post.id }}">{{ post.title }}</a></h2>
+                <h5>Author: {{ post.author }}</h5>
+                <h5>Date: {{ post.date_created }}</h5>
+                <img src="{{ post.image.url }}" width=50%>
+                <p>{{ post.body }}</p>
+                <br>
+            {% endfor %}
+
+
+        </div>
+    </div>
+{% endblock content %}

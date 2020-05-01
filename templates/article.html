@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+    <title>About</title>
+{% endblock %}
+
+
+
+{% block content %}
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital@1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <div class="article">
+        <h1>{{ post.title }}</h1>
+        <img src="{{ post.image.url }}" width=50%>
+        <p>{{ post.body }}</p>
+
+        <div>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_p }}
+                </table>
+                <input type="submit" value="Comment" class="button">
+            </form>
+        </div>
+
+        <form action="{% url 'like_post' %}" method="post">
+            <label>Likes: {{ post.likes.count }}</label>
+            <br>
+            {% csrf_token %}
+            {% if is_liked %}
+                <button type="submit" name="post_id" class="dislike-button" value={{ post.id }}>Dislike</button>
+            {% else %}
+                <button type="submit" name="post_id" class="like-button" value= {{ post.id }}>Like</button>
+            {% endif %}
+        </form>
+
+
+            <h2>Comments {{ comment.count }}</h2>
+            {% for comm in comment %}
+                 <div class="comments">
+                <ul class="media-list">
+                    <li class="media">
+                        <div class="media-left">
+                            <img class="img-rounded"
+                                    {% if comm.user.picture %}
+                                 src="{{ comm.user.picture.url }}"
+                                    {% else %}
+                                 src="/static/images/231076-1908_FPT_202680_base.jpg"
+
+                                    {% endif %} alt="...">
+                        </div>
+                        <div class="media-body">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4>{{ comm.user.get_username }}
+                                        {% if comm.user.first_name and comm.user.last_name %} (
+                                            {{ comm.user.first_name }} {{ comm.user.last_name }}) {% endif %} </h4>
+                                    <h4>
+                                        <span class="date"> {{ comm.time }}</span>
+                                    </h4>
+                                </div>
+                                <div class="panel-body">
+                                    <p> {{ comm.content }}  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+            {% endfor %}
+    </div>
+{% endblock content %}
