@@ -1,1 +1,1 @@
-web: gunicorn coffee_house.wsgi  collectstatic  --log-file -
+web: gunicorn coffee_house.wsgi  --log-file -

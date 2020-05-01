@@ -14,7 +14,7 @@ def register_form(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('http://localhost:8000/')
+            return redirect('index')
         else:
             form = CustomUserCreationForm
             return render(request, 'registration/register.html', {'form': form})
@@ -44,7 +44,7 @@ def account_view(request):
             user = User.objects.filter(email=delete_form.clean_email())
             if user[0].email == request.user.email:
                 user.delete()
-                return redirect('http://localhost:8000/')
+                return redirect('index')
         return render(request, 'registration/account.html', {'delete_form': delete_form, 'user': request.user})
     else:
         delete_form = DeleteAccountForm
@@ -63,9 +63,7 @@ def change_avatar(request):
     if request.method == 'POST':
         user = User.objects.get(id=request.user.id)
         update_picture_form = UpdatePictureForm(data=request.POST, files=request.FILES)
-        print("valid  post")
         if update_picture_form.is_valid():
-            print("valid  pic")
             picture = request.FILES['picture']
             print(picture.size)
             print(picture.name)
@@ -73,7 +71,7 @@ def change_avatar(request):
             print(user.picture)
             user.save()
 
-    return redirect('http://localhost:8000/accounts/account', 'registration/account.html',
+    return redirect('account', 'registration/account.html',
                     {'user': request.user})
 
 
@@ -82,8 +80,6 @@ def save_changes(request):
         user_info_form = UserInfoForm(data=request.POST)
 
         if user_info_form.is_valid():
-            #   user_info_form.save()
-            print("VALID!!!!!!!!")
             username = user_info_form.get_username(request)
             email = user_info_form.get_email(request)
             first_name = user_info_form.get_first_name()
@@ -94,5 +90,5 @@ def save_changes(request):
             user.username = username
             user.email = email
             user.save()
-    return redirect('http://localhost:8000/accounts/account', 'registration/account.html',
+    return redirect('account', 'registration/account.html',
                     {'user': request.user})
