@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 
 from .forms import CustomUserCreationForm, DeleteAccountForm, UserInfoForm, UpdatePictureForm
 
@@ -44,7 +44,7 @@ def account_view(request):
             user = User.objects.filter(email=delete_form.clean_email())
             if user[0].email == request.user.email:
                 user.delete()
-                return redirect('index')
+                return redirect(reverse('index'))
         return render(request, 'registration/account.html', {'delete_form': delete_form, 'user': request.user})
     else:
         delete_form = DeleteAccountForm
@@ -71,7 +71,7 @@ def change_avatar(request):
             print(user.picture)
             user.save()
 
-    return redirect('account', 'registration/account.html',
+    return redirect(reverse('account'), 'registration/account.html',
                     {'user': request.user})
 
 
@@ -90,5 +90,5 @@ def save_changes(request):
             user.username = username
             user.email = email
             user.save()
-    return redirect('account', 'registration/account.html',
+    return redirect(reverse('account'), 'registration/account.html',
                     {'user': request.user})
