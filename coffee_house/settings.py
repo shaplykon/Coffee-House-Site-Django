@@ -24,8 +24,8 @@ SECRET_KEY = 'yef@pz(_axcs@&icc$=bn0%2ng=nbiauswc0iq(!1u-s_q77=n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['shaplykon-coffee.herokuapp.com', '127.0.0.1']
-
+ALLOWED_HOSTS = ['shaplykon-coffee.herokuapp.com', '127.0.0.1', 'localhost']
+#ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -132,6 +132,7 @@ USE_TZ = True
 # Media
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
