@@ -25,22 +25,22 @@
                 <input type="submit" value="Comment" class="button">
             </form>
         </div>
+        {% if current_user.is_authenticated %}
+            <form action="{% url 'like_post' %}" method="post">
+                <label>Likes: {{ post.likes.count }}</label>
+                <br>
+                {% csrf_token %}
+                {% if is_liked %}
+                    <button type="submit" name="post_id" class="dislike-button" value={{ post.id }}>Dislike</button>
+                {% else %}
+                    <button type="submit" name="post_id" class="like-button" value= {{ post.id }}>Like</button>
+                {% endif %}
+            </form>
+        {% endif %}
 
-        <form action="{% url 'like_post' %}" method="post">
-            <label>Likes: {{ post.likes.count }}</label>
-            <br>
-            {% csrf_token %}
-            {% if is_liked %}
-                <button type="submit" name="post_id" class="dislike-button" value={{ post.id }}>Dislike</button>
-            {% else %}
-                <button type="submit" name="post_id" class="like-button" value= {{ post.id }}>Like</button>
-            {% endif %}
-        </form>
-
-
-            <h2>Comments {{ comment.count }}</h2>
-            {% for comm in comment %}
-                 <div class="comments">
+        <h2>Comments {{ comment.count }}</h2>
+        {% for comm in comment %}
+            <div class="comments">
                 <ul class="media-list">
                     <li class="media">
                         <div class="media-left">
@@ -69,7 +69,7 @@
                         </div>
                     </li>
                 </ul>
-                </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
     </div>
 {% endblock content %}

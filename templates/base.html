@@ -16,13 +16,13 @@
 <body>
 
 <div class="header">
-    <h1 class="main-title"><a href="http://localhost:8000/">Coffee house</a></h1>
+    <h1 class="main-title"><a href="{% url 'index' %}">Coffee house</a></h1>
     <p>A website created by me.</p>
 </div>
 
 <div class="navbarr" id="myNavbar">
     {% if user.is_superuser %}
-        <a href="http://localhost:8000/admin" class="right">Admin</a>
+        <a href="{% url 'admin' %}" class="right">Admin</a>
     {% endif %}
     <a href="{% url 'register' %}" class="right">Registration</a>
     {% if user.is_authenticated %}
