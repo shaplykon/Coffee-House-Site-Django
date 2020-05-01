@@ -21,9 +21,6 @@
 </div>
 
 <div class="navbarr" id="myNavbar">
-    {% if user.is_superuser %}
-        <a href="{% url 'accounts:admin' %}" class="right">Admin</a>
-    {% endif %}
     <a href="{% url 'register' %}" class="right">Registration</a>
     {% if user.is_authenticated %}
         <a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
