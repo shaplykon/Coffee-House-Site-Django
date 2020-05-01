@@ -1,9 +1,10 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import CreateView, TemplateView
-from django.contrib.auth.models import User
+
 from .models import Post, Comment
 
 
@@ -40,11 +41,12 @@ def PostDetail(self, pk):
                 comment.save()
                 return HttpResponseRedirect('/post/' + str(pk))
             else:
-                return HttpResponseRedirect('login/')
+                return redirect(reverse('login'))
     else:
         form = CommentForm()
 
-    return render(self, 'article.html', {'form': form, 'post': post, 'comment': comment, 'is_liked': is_liked,'current_user':User})
+    return render(self, 'article.html',
+                  {'form': form, 'post': post, 'comment': comment, 'is_liked': is_liked, 'current_user': User})
 
 
 def like_post(request):
@@ -56,5 +58,3 @@ def like_post(request):
         post.likes.add(request.user)
         is_liked = True
     return HttpResponseRedirect(post.get_absolute_url(), {'is_liked': is_liked})
-
-
