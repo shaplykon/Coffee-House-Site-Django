@@ -22,7 +22,7 @@
 
 <div class="navbarr" id="myNavbar">
     {% if user.is_superuser %}
-        <a href="{% url 'admin' %}" class="right">Admin</a>
+        <a href="{% url 'accounts:admin' %}" class="right">Admin</a>
     {% endif %}
     <a href="{% url 'register' %}" class="right">Registration</a>
     {% if user.is_authenticated %}
