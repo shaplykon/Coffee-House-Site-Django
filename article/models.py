@@ -12,7 +12,7 @@ class Post(models.Model):
         default='',
     )
     body = models.TextField(default='')
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='/media/')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     likes = models.ManyToManyField(Account, related_name='likes', blank=True)
 
