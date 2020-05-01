@@ -24,7 +24,7 @@
     {% if user.is_superuser %}
         <a href="http://localhost:8000/admin" class="right">Admin</a>
     {% endif %}
-    <a href="http://localhost:8000/accounts/register" class="right">Registration</a>
+    <a href="{% url 'register' %}" class="right">Registration</a>
     {% if user.is_authenticated %}
         <a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
         <a href="{% url 'favourites' %}">Favourites</a>
