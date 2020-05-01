@@ -40,7 +40,7 @@ def PostDetail(self, pk):
                 comment.save()
                 return HttpResponseRedirect('/post/' + str(pk))
             else:
-                return HttpResponseRedirect('http://localhost:8000/accounts/login/?next=/post/1/')
+                return HttpResponseRedirect('login/')
     else:
         form = CommentForm()
 
