@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'yef@pz(_axcs@&icc$=bn0%2ng=nbiauswc0iq(!1u-s_q77=n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['shaplykon-coffee.herokuapp.com', '127.0.0.1', 'localhost']
 # ALLOWED_HOSTS = []
@@ -133,12 +133,12 @@ USE_TZ = True
 
 # Media
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+MEDIA_URL = '/static/images/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
