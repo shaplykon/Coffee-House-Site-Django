@@ -6,8 +6,6 @@
     <div class="row">
         <div class="side">
             <br>
-
-
             {% if user.is_authenticated %}
                 <h2>Welcome, {{ user.get_username }}</h2>
             {% endif %}
@@ -28,9 +26,9 @@
                     Menu
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="http://localhost:8000/menu/coffee">Coffee</a>
-                    <a class="dropdown-item" href="http://localhost:8000/menu/tea">Tea</a>
-                    <a class="dropdown-item" href="http://localhost:8000/menu/desserts">Desserts</a>
+                    <a class="dropdown-item" href="{% url 'coffee' %}">Coffee</a>
+                    <a class="dropdown-item" href="{% url 'tea' %}">Tea</a>
+                    <a class="dropdown-item" href="{% url 'desserts' %}">Desserts</a>
                 </div>
             </div>
         </div>
