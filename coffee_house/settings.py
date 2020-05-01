@@ -25,7 +25,7 @@ SECRET_KEY = 'yef@pz(_axcs@&icc$=bn0%2ng=nbiauswc0iq(!1u-s_q77=n'
 DEBUG = False
 
 ALLOWED_HOSTS = ['shaplykon-coffee.herokuapp.com', '127.0.0.1', 'localhost']
-#ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.sites',
+    # 'django.contrib.sites',
     'crispy_forms',
 ]
 
@@ -55,7 +55,8 @@ MIDDLEWARE = [
 
 MIDDLEWARE_CLASSES = [
     'account.middleware.LocaleMiddleware',
-    'account.middleware.TimezoneMiddleware'
+    'account.middleware.TimezoneMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'coffee_house.urls'
@@ -132,11 +133,10 @@ USE_TZ = True
 # Media
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Authorization
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
