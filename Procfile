@@ -1,1 +1,1 @@
-web: gunicorn coffee_house.wsgi --log-file -
+web: gunicorn coffee_house.wsgi  collectstatic --noinput; --log-file -
